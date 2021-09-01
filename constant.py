@@ -24,3 +24,15 @@ METRIC_WEIGHT = "Enter your weight in kilograms: "
 
 CORRECT_INPUT_SYSTEM = "Please select one of the valid options (M or I): "
 RESULT_BMI = "Your current BMI is: "
+
+DESCRIPTION_OVERALL = "This program is a fitness junkie dream. It can calculate" \
+                      "the calories based on macros of some food and it also tells the" \
+                      "user what's their BMI in both metric and imperial system."
+OPTION_MACRO = "--MACRO"
+OPTION_MACRO_SHORT = "-m"
+OPTION_BMI = "--BMI"
+OPTION_BMI_SHORT = "-b"
+OPTION_IMPERIAL = "-i"
+DESCRIPTION_MACRO = "Calculate the amount of calories based on the amount of carbs, fats, and proteins."
+DESCRIPTION_BMI = "Calculate the body mass index using weight and height."
+DESCRIPTION_IMPERIAL = "Uses the imperial system"
