@@ -25,6 +25,7 @@ Use the flag -h for more help regarding command line arguments.
 
 # Libraries
 import sys
+
 import constant
 import math
 import argparse
@@ -123,7 +124,7 @@ def menu_no_commands():
         print(constant.RESULT_BMI + str(calculate_bmi_metric(str(weight), str(height))))
 
 
-def main():
+def argument_interface():
     """
     The main method parses the arguments and if there are none, calls the method menu_no_commands()
     """
@@ -147,5 +148,4 @@ def main():
             print(constant.RESULT_BMI + str(calculate_bmi_metric(weight=args.BMI[0], height=args.BMI[1])))
 
 
-if __name__ == '__main__':
-    main()
+
