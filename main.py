@@ -120,7 +120,7 @@ def menu_no_commands():
             weight = input(constant.METRIC_WEIGHT)
         else:
             print(constant.CORRECT_INPUT_SYSTEM)
-            main()
+            argument_interface()
         print(constant.RESULT_BMI + str(calculate_bmi_metric(str(weight), str(height))))
 
 
