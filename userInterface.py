@@ -1,15 +1,22 @@
 import tkinter as tk
+import controller as controller
 from tkinter import ttk
 import main
 
+current_weight: int = 0
+current_height: int = 0
+
 
 def button_calculate(frame_bmi, height, weight, font_style_body):
+    global current_height, current_weight
     result = main.calculate_bmi_metric(weight=weight, height=height)
     text_result = ttk.Label(frame_bmi, text="Your BMI is: ", font=font_style_body)
     text_calculated = ttk.Label(frame_bmi, text="{:.{precision}f}".format(result, precision=2),
                                 font=font_style_body)
     text_result.grid(row=4, column=0)
     text_calculated.grid(row=4, column=1)
+    current_height = height
+    current_weight = weight
 
 
 class HealthMainView(tk.Tk):
@@ -25,7 +32,8 @@ class HealthMainView(tk.Tk):
         main_menu = tk.Menu(self)
         file_menu = tk.Menu(main_menu, tearoff=False)
         file_menu.add('command', label='Open')
-        file_menu.add('command', label='Save')
+        file_menu.add('command', label='Save',
+                      command=lambda: controller.save_body_info(height=current_height, weight=current_weight))
         file_menu.add('command', label='Save As')
         file_menu.add('command', label='Exit', command=self.quit())
         main_menu.add_cascade(label='File', menu=file_menu)
