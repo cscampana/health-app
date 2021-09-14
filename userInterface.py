@@ -19,6 +19,13 @@ def button_calculate(frame_bmi, height, weight, font_style_body):
     current_weight = weight
 
 
+def handle_open(self, weight, height):
+    global current_height, current_weight
+    current_height = height
+    current_weight = weight
+    self.bmi_tab(current_height, current_weight)
+
+
 class HealthMainView(tk.Tk):
 
     def __init__(self, *args, **kwargs):
@@ -29,9 +36,12 @@ class HealthMainView(tk.Tk):
         self.main_interface().pack()
 
     def menu(self):
+        global current_height, current_weight
         main_menu = tk.Menu(self)
         file_menu = tk.Menu(main_menu, tearoff=False)
-        file_menu.add('command', label='Open')
+        file_menu.add('command', label='Open',
+                      command=lambda: handle_open(self, weight=controller.read_config()[0],
+                                                  height=controller.read_config()[1]))
         file_menu.add('command', label='Save',
                       command=lambda: controller.save_body_info(height=current_height, weight=current_weight))
         file_menu.add('command', label='Save As')
@@ -46,7 +56,7 @@ class HealthMainView(tk.Tk):
 
         return tab
 
-    def bmi_tab(self):
+    def bmi_tab(self, weight=0, height=0):
         font_style_title = ("Arial", 20)
         font_style_body = ("Arial", 14)
 
@@ -59,14 +69,20 @@ class HealthMainView(tk.Tk):
         # Row 1
         text_input_weight = ttk.Label(frame_bmi, text="Input your weight: ", font=font_style_body)
         input_weight = ttk.Entry(frame_bmi, font=font_style_body)
+
         text_input_weight.grid(row=1, column=0, ipady=20, padx=20)
         input_weight.grid(row=1, column=1, padx=20)
+        input_weight.delete(0, tk.END)
+        input_weight.insert(0, weight)
 
         # Row 2
         text_input_height = ttk.Label(frame_bmi, text="Input your height: ", font=font_style_body)
         input_height = ttk.Entry(frame_bmi, font=font_style_body)
         text_input_height.grid(row=2, column=0, padx=20)
+
         input_height.grid(row=2, column=1, padx=20)
+        input_height.delete(0, tk.END)
+        input_height.insert(0, height)
         # Row 3
         button_submit_bmi = ttk.Button(frame_bmi, text="Calculate",
                                        command=lambda: button_calculate(frame_bmi, input_height.get(),
